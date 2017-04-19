@@ -1,0 +1,12 @@
+For a reason that is unknown to me, there was an error when I attempted to push
+my App's src folder to Github. I have ended up with two Repos, one which contains only the
+src folder, and another which contains all the files in the project, excepting that
+the src folder is empty. I have been unable to fix this problem, and so I humbly present
+both Repositories, in the hope that the Reader considers this sufficient. If this is not so,
+I am perfectly willing to provide the entire project in a suitable form (zip, rar, etc).
+
+Src Folder:
+https://github.com/ProfHats/ParaQuest
+
+Other Parts of the Project:
+https://github.com/ProfHats/ParaQuestComplete
