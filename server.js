@@ -1,14 +1,23 @@
-// Load the http module to create an http server.
-import http from 'http';
 import config from './config';
+import express from 'express';
+import adventureRouter from './api/adventures';
+import bodyParser from 'body-parser';
 
-// Configure our HTTP server to respond with Hello World to all requests.
-var server = http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end('Hello World!');
+const server = express();
+server.use(express.static('src/public'));
+
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded());
+server.use('/api/adventures', adventureRouter);
+
+
+//route for simple greeting
+//notice that in this case, the route is defined in server.js, while with 
+//adventureRouter we determine that in another place and import it
+server.get('/greeting',(req,res)=>{
+res.end('Greetings, my name is Genji, I need healing!');	
 });
 
-server.listen(config.port);
-
-// Put a friendly message on the terminal
-console.log("Server running at " + config.port);
+server.listen(config.port, () => {
+  console.info('Express listening on port', config.port);
+});
