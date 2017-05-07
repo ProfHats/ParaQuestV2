@@ -92,6 +92,7 @@ at appropriate times, such as when an item was used.
 +The proper use of browserhistory.push() to programmatically go to a certain route
 +The correct use of random() to generate pseudorandom numbers for use with the Tests
 +The use of callbacks to pass state between Parent components and Child components (not finished, but studied)
++The correct way to use axios.all to run multiple axios requests in sequence, then performing a single action when all requests have returned
 
 [image1]: https://cloud.githubusercontent.com/assets/8709835/24334558/10f8fd76-1264-11e7-94a2-4451e39799fc.jpg
 [image2]: https://cloud.githubusercontent.com/assets/8709835/24334561/149057b8-1264-11e7-8ed9-c7409b7424cb.jpg
