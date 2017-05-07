@@ -38,6 +38,8 @@ Tests). Due to the application's design, each Adventure page must have each of t
 + ReactJS v15.4.2
 + Bootstrap 3
 + create-react-app tool
++ MongoDB
++ Mongoose
 
 After cloning the app from the repository, several steps must be followed in order to run the app. Firstly, a mongo database must
 be initialised via 'mongod' or 'mongod --smallfiles'. Then, the user must navigate to the 'PQ' folder and launch the Express Server
