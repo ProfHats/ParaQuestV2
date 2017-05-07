@@ -249,23 +249,6 @@ console.log("the New Item is: " + newItem.id);
 console.log("It has " + newItem.charges + " uses"); 
 console.log("mongo ID is " + mongoID);
 api.updateItem(mongoID, newItem);
-/*.then(resp => {
-var newItems = this.state.items;
-for (var i=0; i<this.state.items.length; i++)
-{
-if(this.state.items[i].id == resp.id)
-{
-this.state.items[i] == resp.data;//not sure if .data is needed	
-}
-this.setState({
-items: newItems	
-});	
-}
-}
-).catch(e => {
-	console.log(e);
-	})
-*/	
 }
 
 //does this need a .then? Maybe we're changing the database, but not calling up the data from it...maybe we need to re-change the data in the app's State?
@@ -281,32 +264,12 @@ browserHistory.push(fail);
 }	
 },
 
-/*findAdv : function(array, id) {
-var adv;
-adv = array.map(function(adventure, id){
-if(adventure.id == id){
-return adventure;	
-}
-}
-return adv;	
-},
-*/
 render: function(){
 	if(this.state.adventures)//this line is here to ensure that the whole thing doesn't load until the Promises return...in theory, at least
 	{
-	
 	var self = this;
-	
-		/*axios.all([
-		axios.get('/api/adventures'),
-		]).then(function(data){
-		self.setState({
-		adventures : data
-		});
-		}.bind(this));
-	*/
-	//You probably shouldn't need to invoke axios directly in this file. That was the point of having the api. Invoke that instead.
-		 var adventures = self.state.adventures;
+
+	var adventures = self.state.adventures;
 		 var items = self.state.items;
 		 var thisID = this.props.params.advID;
 		 var thisAdventure = "";
@@ -320,17 +283,6 @@ render: function(){
 		 thisAdventure = adventures[i]; 
 		 }	 
 		 }
-		 
-		 /*adventures.map(function(nextAdv){
-		 console.log("The current Adventure is " + nextAdv.id);	 
-		 if(nextAdv.id === thisID){
-		 return thisAdventure;
-		 }
-		 
-		 //currently this is setting thisAdventure, THEN also returning it that might cause problems
-		 }.bind(this)
-		 );
-		 */
 		 console.log("Final Test: " + thisAdventure.id);
 		 
 	
@@ -390,9 +342,6 @@ api.updateChar("default", nChara).then(resp => {
 	}).catch(e => {
 	console.log(e);	
 	});
-//need a callback here that tells index.js (specifically App) that strength needs to be updated
-//in future, this section will no longer need to refer to props.route, but will refer instead to the stats variable
-//in index.js' App component
 break;
 case 'brains':
 this.props.route.character.brains += StatsIncrease.amount;
@@ -490,18 +439,10 @@ default:
 
 
 }
-//anonymous function is to stop the default behavior, otherwise it won't wait for the button to be clicked
-//sending in i-1 is a quick-n-dirty workaround to get around the bizarre fact that i somehow winds up being
-//passed in as 1 point higher than it's supposed to be (there's only one element in the array tests[], so
-//i should only ever equal 0, which is not a problem. However, it inexplicably equals 1, which doesn't exist
-//and causes a crash. Also, the buttons always seem to execute the last option in the array, all the buttons will do
-//the same thing. Really unfortunate.
 
 }
-//}
-//this.forceUpdate();
 
-		var adventures = self.state.adventures;
+var adventures = self.state.adventures;
 if(typeof (self.state.character) != 'undefined'){
 console.log("this.state.character's strength is :" + self.state.character[0].strength);	
 return(

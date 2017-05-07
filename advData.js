@@ -22,6 +22,14 @@ const adventures = [
       ],
       "tests": []
     },
+	{
+	"id": "dead",
+	"text": "Your injuries have grown too severe. You are dead. Better luck next time!",
+    "previous": "start",
+    "statGain": [],
+	"next": [],
+	"tests": []
+	},
     {
       "id": "orangeRoom1",
       "text": "The door swings open noiselessly, revealing a floor of orange tiles. The room you step into feels cool, and you notice strange shrines in alcoves hidden in the walls.",

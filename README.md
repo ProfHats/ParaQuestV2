@@ -28,22 +28,31 @@ Tests). Due to the application's design, each Adventure page must have each of t
  + Dynamic Routing through parameterised URLs, which are tracked by way of a complex array of interconnected objects
  + Randomisation, carried out by API and used together with stats to determine the outcome of tests. 
  + Rudimentary Inventory system carried out via routing
+ 
+ New features added in the New Version of the App:
+ + Adventures, Items, and Characters stored in and retrieved from a Mongo Database
+ + Mongoose Models for each of the above
+ + Create, Read, Update, and Delete access to Items. Read access to Adventures. Read and Update access to Characters. 
 
 ## Installation requirements.
 + ReactJS v15.4.2
 + Bootstrap 3
 + create-react-app tool
 
-After cloning the app from the repository, one only needs to run it via 'npm start'. No extra steps need to be taken.
-
+After cloning the app from the repository, several steps must be followed in order to run the app. Firstly, a mongo database must
+be initialised via 'mongod' or 'mongod --smallfiles'. Then, the user must navigate to the 'PQ' folder and launch the Express Server
+via 'npm start'. Finally, the user must navigate to 'PQ/client' and initialise the React App via 'npm start'. Attempting to initialise
+the Express Server without having the Mongo Database activate will result in failure. While it is technically possible to launch the 
+React App without having the Express Server active, it will not function properly, as it needs to retrieve important data from the Express Server.
 
 ## Data Model Design.
+
+The Design of the Data Models in the new version of ParaQuest is largely the same as that of the previous version.
 
 ![][image1]
 (the App's Data Model)
 
-There were some problems with attempting to preserve State across different AdventurePages, and the feature was ultimately dropped. As of now,
-State resets when the Page changes, which makes the App's persistence system less-than-satisfactory.
+The App maintains a local storage of its State data, but it retrieves this data from a Mongo Database.
 
 ## App Component Design.
 
@@ -62,19 +71,21 @@ State resets when the Page changes, which makes the App's persistence system les
 (The Inventory Screen)
 ![][image7]
 (The Screen for a single Item)
+
 ## Routing.
 
-+ /:advID - routes the player to an AdventureView, with data based on the advID
-+ /:advID/inventory - routes the player to their inventory via 'Inventory' view. Placing it after /:advId allows the player to quickly return from the Inventory Screen to their previous state
-+ /:advID/inventory/:itemId - routes the player to the description of a particular item, providing them with extra information about it via the 'Item' view
++'/:advID' - routes the player to an AdventureView, with data based on the advID
++'/:advID/inventory' - routes the player to their inventory via 'Inventory' view. Placing it after /:advId allows the player to quickly return from the Inventory Screen to their previous state
++'/:advID/inventory/:itemId' - routes the player to the description of a particular item, providing them with extra information about it via the 'Item' view
 
+ 
 ## Extra features
 
 The app also features a random number generator, created in the API via the math.random method. This is used to determine whether or not a user
 passed a test, when they take one.
 The app features a system that allows the player to inspect their inventory, showing all their current items as well as detailed descriptions of such.
-The inventory, like the Stats variable, is held in the root App Component, as that is a parent of all the Components that need to know about such data.
-A system to persist changes to State, such as the addition/removal of Weapons and Stats, was planned. This system was never finished due to lack of time, however.
+The addition, modification, and removal of inventory items is possible through the API. An attempt was also made to have the data altered automatically
+at appropriate times, such as when an item was used.
 
 ## Independent learning.
 
