@@ -74,9 +74,9 @@ The App maintains a local storage of its State data, but it retrieves this data 
 
 ## Routing.
 
-+'/:advID' - routes the player to an AdventureView, with data based on the advID
-+'/:advID/inventory' - routes the player to their inventory via 'Inventory' view. Placing it after /:advId allows the player to quickly return from the Inventory Screen to their previous state
-+'/:advID/inventory/:itemId' - routes the player to the description of a particular item, providing them with extra information about it via the 'Item' view
++/:advID - routes the player to an AdventureView, with data based on the advID
++/:advID/inventory - routes the player to their inventory via 'Inventory' view. Placing it after /:advId allows the player to quickly return from the Inventory Screen to their previous state
++/:advID/inventory/:itemId - routes the player to the description of a particular item, providing them with extra information about it via the 'Item' view
 
  
 ## Extra features
