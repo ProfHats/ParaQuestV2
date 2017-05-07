@@ -33,7 +33,8 @@ Tests). Due to the application's design, each Adventure page must have each of t
  + Adventures, Items, and Characters stored in and retrieved from a Mongo Database
  + Mongoose Models for each of the above
  + Create, Read, Update, and Delete access to Items. Read access to Adventures. Read and Update access to Characters. 
-
+ 
+ 
 ## Installation requirements.
 + ReactJS v15.4.2
 + Bootstrap 3
@@ -88,6 +89,7 @@ passed a test, when they take one.
 The app features a system that allows the player to inspect their inventory, showing all their current items as well as detailed descriptions of such.
 The addition, modification, and removal of inventory items is possible through the API. An attempt was also made to have the data altered automatically
 at appropriate times, such as when an item was used.
+Basic API testing was added, but could not be made functional in time. API testing through POSTMan confirms that the API is functional, however.
 
 ## Independent learning.
 
