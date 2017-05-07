@@ -2,6 +2,7 @@
 	import axios from 'axios'; // new addition - take this out if you remove the getAllAsArray function (or w/ev it's called)
 	import {Link} from 'react-router';
 	import * as api from './api';
+	import {browserHistory} from 'react-router';
 
 	
 	
@@ -9,7 +10,6 @@
 			 //TODO: Make a CSS file that turns the "statsbar" elements into an actual bar, 
 		 //so they don't stick together like glue anymore
 		render : function(){
-		console.log(this.props.foo.strength);
 		return(
 		<div>
 		 <td>
@@ -53,7 +53,7 @@
 		render : function()
 		{
 		return(
-		<LinkToAdventures adventures={this.props.adventures}/>
+		<LinkToAdventures adventures={this.props.adventures} items={this.props.items}/>
 		);	
 		}
 	});
@@ -65,7 +65,7 @@
 		var listAdv = this.props.adventures.map(function(adventure) {
 		if(adventure.id === 'start'){	
 		return (
-		<SingleAdventure advData={adventure} />
+		<SingleAdventure advData={adventure} items={this.props.items}/>
 		);
 		}
 		//this successfully limits us to the first adventure for the time being. To remove, remove the if statement
@@ -95,6 +95,7 @@
 		<div>
 		<p>{this.props.advData.text}</p>
 		<p>{nextAdventures}</p>
+		<button onClick={()=> browserHistory.push(this.props.advData.id + "/inventory")}>Inventory</button>
 		</div>
 		);	
 		}
@@ -106,37 +107,53 @@
 		
 		
 	getInitialState:function(){
-	return{adventures: ["foo"]};	
+	return{adventures: ["foo"], items: ["bar"]};	
 	},
 
 	componentDidMount:function(){
-	api.getAll().then(resp => {
-	console.log(resp);	
+	api.getAllAdventures().then(resp => {
 	this.setState({
-	adventures: resp.adventures,
+	adventures: resp,
+	
 	});
+
 	}).catch(e => {
 		console.log(e);
 		
 	});
-	},
+		console.log("The state is currently " + this.state.adventures);	
+	api.getAllItems().then(resp => {
+	this.setState({
+	items: resp,
+	});
+	}).catch(e => {
+	console.log(e);
+	})
+	}
+	,
 	
 	
 		
         render : function(){
-		axios.all(() => {
-		return axios.get('/api/adventures')
-		}).then((res) => {
-		this.setState({
-		adventures: res	
+		var self = this;
+		axios.all([
+		axios.get('/api/adventures'),
+		axios.get('/api/items')
+		]).then(
+		axios.spread(function (advs, items){
+		self.setState({
+		adventures : advs,
+		items : items
 		});
-		//you stopped the infinite looping by removing the need for axios.all() to run for each member of the adventures
-		//array, since after all it begins empty. Then, when it was full, it'd reload, and run for each, and somehow this
-		//would cause an infinite loop.
-		})	
-		 var adventures = this.state.adventures;
+		}
+		)
+		);
+		
+		 var adventures = self.state.adventures;
+		 var items = self.state.items;
 		 //the api.getAll() promise has resolved and returned an Array.
-		console.log("The Adventures stat is currently " + adventures);
+		console.log("There are " + adventures.length + " Adventures");
+		console.log("There are " + items.length + " Items");
 
             return (
 			<div>
@@ -148,7 +165,7 @@
 		   </tr>
 		   </tbody>
 		   </table>
-		   <MainBody adventures={adventures}/>
+		   <MainBody adventures={adventures} items={items}/>
 		   </div>
             );
         }

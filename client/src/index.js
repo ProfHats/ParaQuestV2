@@ -6,6 +6,8 @@
 	import AdventureView from './adventurePage';
 	import Inventory from './inventory';
 	import Item from './item';
+	import * as api from './api';
+	import axios from 'axios';
 	
 		    var App = React.createClass({
 				
@@ -40,7 +42,8 @@
     });
 			var STR = 'Strength: ';		
 	
-	var invData = [
+	/*var invData = [
+	
 	{
 	id: 'ironSword',	
 	name: 'Iron Sword',
@@ -66,9 +69,12 @@
 	name: 'Hunk of dry cheese',
 	text: 'A piece of old, stale cheese. At least there is no mould on it'
 	}
-	
 	];
+	*/
 	
+	var invData = api.getAllItems();
+	
+	console.log("The items inventory consists of " + invData);
 	var stats = 
 	{
 	strength : 5,
@@ -93,7 +99,6 @@
            <Route path="/:advID" component={AdventureView} character={stats}/>
 		   <Route path="/:advID/inventory" component={Inventory} inv={invData}/>
 		   <Route path="/:advID/inventory/:itemName" component={Item} inv={invData}/>
-		   //a route for each item? It'd be a cheap way to get another route.
 		   </Route>
       </Router>
     ),

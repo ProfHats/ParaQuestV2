@@ -1,0 +1,17 @@
+We were successfully loading in an Adventure from the Mongo DB in adventurePage, but, since statGain doesn't exist
+in this particular Adventure, that's not being loaded in, and when you try to do various things with statGain
+(as the page is programmed to do) you get an error. Trying to bracket them off doesn't really work either.
+Figure out how to fix this.
+
+(Next)
+
+-Add the possibility for routes that allow you to be more fine-grained -> currently you can get Adventures and get a single Adventure,
+but you should add the ability to get a single variable of an Adventure (ie, GET /api/adventures/earthRoom1/next)
+
+-Also, in order to properly make your Adventure Schema work, you will need a Schema for each complex object (Tests, Next, and StatGain)
+
+//if (statGain) and other things of this type will check whether StatGain exists or not, which should help to reduce the problem of adventurePage
+crashing because of it trying to do stuff with undefined variables.
+
+CUURENT: I discovered a strange bug - even though you changed inventory.js, the ReactDOM is not in fact registering those changes, and is loading the
+old, non-functional file. This is odd. Perhaps you could try restarting the laptop. I wonder if that'd do anything. Hmm...
